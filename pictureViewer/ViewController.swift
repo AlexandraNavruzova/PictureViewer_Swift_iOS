@@ -13,6 +13,8 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
 
         title = "Picture Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -48,6 +50,14 @@ class ViewController: UITableViewController {
             vc.totalPictures = pictures.count
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func shareTapped() {
+        let str = "Hi friend! This is an awesome app! Download here https://itunes.apple.com..."
+        
+        let vc = UIActivityViewController(activityItems: [str], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 }
 
